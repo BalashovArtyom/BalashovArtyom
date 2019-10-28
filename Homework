@@ -1,31 +1,34 @@
-# 1. Применение методов (S.find()), (S.join()), (S.title())
-string1='London is the capital of the Great Britain'
-print(string1.find('great'))
-print(string1.find('cap'))
+Задача 1) 
+Применение методов (S.find());(S.join());(S.title())
+string1='Moscow is the capital of Russia'
+print(string1.find('Moscow'))
+print(string1.find('capital'))
 
 string2='_'
 print(string2.join(string1))
 
-string3='mark vladimir vasiliy artem ivan' 
+string3='dima nikita petr katy artem' 
 print(string3.title())
 
 
 
-# 2. Написать функцию, которая принимает на вход строку и возвращает количество подстрок "17" в обратной записи строки.
+Задача 2) 
+Написать функцию, которая принимает на вход строку и возвращает количество подстрок "17" в обратной записи строки.
 def ilove17(string):
-	string1=string[::-1]
+        string1=string[::-1]
 	print(string1.count('17'))
 ilove17(input())
 
 
 
-# 3. Ввести список чисел, разделенных пробелами и вывести их медиану — число, стоящее в середине отсортированного списка.
+Задача 3)
+Ввести список чисел, разделенных пробелами и вывести их медиану — число, стоящее в середине отсортированного списка.
 num=input().split()
 if (len(num)%2) == (0):
 	sr1=int(len(num)/2)
 	sr2=sr1-1
-	i=int(num[sr1])+int(num[sr2])
-	print('Медиана: ', i/2)
+	x=int(num[sr1])+int(num[sr2])
+	print('Медиана: ', x/2)
 else:
-	i=len(num)-1
-	print('Медиана:', num[int(i/2)])
+	x=len(num)-1
+	print('Медиана:', num[int(x/2)])
