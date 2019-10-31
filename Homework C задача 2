@@ -1,0 +1,13 @@
+Задача 2)
+#include <math.h>
+#include <stdio.h>
+int main()
+{
+    unsigned long int n,x,a;
+    a=pow(10,18);
+    n=10;
+    x=18;
+    printf("%lu", 18 * a);
+}
+Вывод:
+18000000000000000000 
