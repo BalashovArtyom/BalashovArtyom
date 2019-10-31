@@ -1,0 +1,48 @@
+Задача 1)
+#include <stdio.h>
+int main()
+{
+    printf("char %lu байт(ов)\n", sizeof(char));
+    printf("short %lu байт(ов)\n", sizeof(short));
+    printf("short int %lu байт(ов)\n", sizeof(short int));    
+    printf("signed short %lu байт(ов)\n", sizeof(signed short));
+    printf("unsigned short %lu байт(ов)\n", sizeof(unsigned short));
+    printf("int %lu байт(ов)\n", sizeof(int));
+    printf("signed %lu байт(ов)\n", sizeof(signed));    
+    printf("unsigned %lu байт(ов)\n", sizeof(unsigned));
+    printf("unsigned long long %lu байт(ов)\n", sizeof(unsigned long long));
+    printf("float %lu байт(ов)\n", sizeof(float));
+    printf("double %lu байт(ов)\n", sizeof(double));    
+    printf("long double %lu байт(ов)\n", sizeof(long double));
+}
+Вывод:
+char 1 байт(ов)                                                                                                                      
+short 2 байт(ов)                                                                                                                     
+short int 2 байт(ов)                                                                                                                 
+signed short 2 байт(ов)                                                                                                              
+unsigned short 2 байт(ов)                                                                                                            
+int 4 байт(ов)  
+signed 4 байт(ов)                                                                                                                    
+unsigned 4 байт(ов)                                                                                                                  
+unsigned long long 8 байт(ов)                                                                                                        
+float 4 байт(ов)                                                                                                                     
+double 8 байт(ов)   
+long double 16 байт(ов)
+
+
+
+Задача 2)
+#include <math.h>
+#include <stdio.h>
+int main()
+{
+    double n,x;
+    n=10;
+    x=18;
+    printf("%f", 18 * pow(10,18));
+}
+Вывод:
+18000000000000000000.000000
+
+
+
