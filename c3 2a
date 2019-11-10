@@ -1,0 +1,56 @@
+#include <stdio.h>
+int main()
+{
+    float v, w, x, y, z;
+    scanf("%f %f %f %f %f", &v, &w, &x, &y, &z);
+    if(v>w)
+      if(v>x)
+        if(v>y)
+          if(v>z)
+            printf("max=%f", v);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);
+      else
+        if(x>y)
+          if(x>z)
+            printf("max=%f", x);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);
+    else
+      if(w>x)
+        if(w>y)
+          if(w>z)
+            printf("max=%f", w);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);
+      else
+        if(x>y)
+          if(x>z)
+            printf("max=%f", x);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);      
+    return 0;
+}
+ПРИМЕР
+1.002 123.45 99.999 10e5 -12222.000095                                                                                       
+max=1000000.000000
