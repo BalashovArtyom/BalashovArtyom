@@ -1,0 +1,152 @@
+Задача N1
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int a, b, c;
+    double x, x1, x2, D;
+    scanf("%d", &a);
+    scanf("%d", &b);
+    scanf("%d", &c);
+    D=b*b -4*a*c;
+    if(D>=0)
+    {
+        x1=(-b-sqrt(D))/(2*a);
+        x2=(-b+sqrt(D))/(2*a);
+        printf("x1=%f\n", x1);
+        printf("x2=%f", x2);
+    }
+    else
+    {
+        printf("корней нет");
+    }
+    return 0;
+}
+ПРИМЕР 1)
+1                                                                                                                              
+2                                                                                                                              
+10                                                                                                                             
+корней нет
+ПРИМЕР 2)
+2
+2                                                                                                                              
+-5                                                                                                                             
+-12                                                                                                                            
+x1=-1.500000                                                                                                                   
+x2=4.0000
+
+Задача 2)а
+#include <stdio.h>
+int main()
+{
+    float v, w, x, y, z;
+    scanf("%f %f %f %f %f", &v, &w, &x, &y, &z);
+    if(v>w)
+      if(v>x)
+        if(v>y)
+          if(v>z)
+            printf("max=%f", v);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);
+      else
+        if(x>y)
+          if(x>z)
+            printf("max=%f", x);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);
+    else
+      if(w>x)
+        if(w>y)
+          if(w>z)
+            printf("max=%f", w);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);
+      else
+        if(x>y)
+          if(x>z)
+            printf("max=%f", x);
+          else
+            printf("max=%f", z);
+        else
+          if(y>z)
+            printf("max=%f", y);
+          else
+            printf("max=%f", z);      
+    return 0;
+}
+ПРИМЕР
+1.002 123.45 99.999 10e5 -12222.000095                                                                                       
+max=1000000.000000
+
+Задача 2)б
+#include <stdio.h>
+int main()
+{
+    float v, w, x, y, z;
+    scanf("%f %f %f %f %f", &v, &w, &x, &y, &z);
+    if(v<w)
+      if(v<x)
+        if(v<y)
+          if(v<z)
+            printf("min=%f", v);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);
+      else
+        if(x<y)
+          if(x<z)
+            printf("min=%f", x);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);
+    else
+      if(w<x)
+        if(w<y)
+          if(w<z)
+            printf("min=%f", w);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);
+      else
+        if(x<y)
+          if(x<z)
+            printf("min=%f", x);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);      
+    return 0;
+}
+ПРИМЕР 
+-0.9 2.15 19.01 19.009 7.8                                                                                                   
+min=-0.900000 
