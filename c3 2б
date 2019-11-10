@@ -1,0 +1,56 @@
+#include <stdio.h>
+int main()
+{
+    float v, w, x, y, z;
+    scanf("%f %f %f %f %f", &v, &w, &x, &y, &z);
+    if(v<w)
+      if(v<x)
+        if(v<y)
+          if(v<z)
+            printf("min=%f", v);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);
+      else
+        if(x<y)
+          if(x<z)
+            printf("min=%f", x);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);
+    else
+      if(w<x)
+        if(w<y)
+          if(w<z)
+            printf("min=%f", w);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);
+      else
+        if(x<y)
+          if(x<z)
+            printf("min=%f", x);
+          else
+            printf("min=%f", z);
+        else
+          if(y<z)
+            printf("min=%f", y);
+          else
+            printf("min=%f", z);      
+    return 0;
+}
+ПРИМЕР 
+-0.9 2.15 19.01 19.009 7.8                                                                                                   
+min=-0.900000 
