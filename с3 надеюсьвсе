@@ -1,0 +1,53 @@
+ПЕРЕДЕЛАННАЯ ЗАДАЧА 1)
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int a, b, c;
+    double x, x1, x2, D;
+    scanf("%d", &a);
+    scanf("%d", &b);
+    scanf("%d", &c);
+    D=b*b -4*a*c;
+    if(D!=0)
+    {
+        if(D>0)
+        {
+            x1=(-b-sqrt(D))/(2*a);
+            x2=(-b+sqrt(D))/(2*a);
+            printf("x1=%f\n", x1);
+            printf("x2=%f", x2);
+        }
+        else
+        {
+            printf("КОРНЕЙ НЕТ");
+        }
+    }
+    else
+    {
+        x=-b/(2*a);
+        printf("x1=x2=%f", x);
+    }
+    return 0;
+}
+
+ЗАДАЧА 3)
+#include <stdio.h>
+int main()
+{
+    int a, b, N, k;
+    scanf("%d", &N);
+    for(a = 0; a < N; a++)
+    {
+        for(b = 0; b < (N - 1 - a); b++) 
+        {
+            printf(" ");
+        }
+        for (k = 0; k < (N - b + a); k++) 
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+    return 0;
+}
