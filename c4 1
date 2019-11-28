@@ -1,0 +1,23 @@
+Задача 1)
+#include <stdio.h>
+int main()
+{
+    int n, x;
+    printf("Введите кол-во элементов в массиве: ");
+    scanf("%d", &n);
+    int arr[n];
+    for (int j = 0; j < n; j++)
+        scanf("%d", &arr[j]);
+    for (int i = 0; i < n; i++) {
+        for (int k = 1; k < n; k++) {
+            if (arr[k-1] > arr[k]) {
+                x = arr[k-1];
+                arr[k-1] = arr[k];
+                arr[k] = x;
+            }
+        }
+    }
+    printf("Отсортированный массив:\n");
+    for (int j = 0; j < n; j++)
+        printf("[%d] ", arr[j]);
+}
