@@ -1,0 +1,49 @@
+Задача 1) Сортировка пузырьком
+#include <stdio.h>
+int main()
+{
+    int n,a;
+    printf("Введите кол-во чисел в массиве: ");
+    scanf("%d", &n);
+    int arr[n];
+    for(int j=0; j<n; j++)
+        scanf("%d", &arr[j]);
+    for(int i=0; i<n; i++){
+        for(int k=1; k<n; k++){
+            if(arr[k-1]>arr[k]){
+                a=arr[k-1];
+                arr[k-1]=arr[k];
+                arr[k]=a;
+            }
+        }
+    }
+    printf("Массив отсортированный пузырьком:\n");
+    for (int j=0; j<n; j++)
+        printf("[%d] ", arr[j]);
+    return 0;
+}
+
+Задача 2) Сортировка выбором
+#include <stdio.h>
+int main()
+{
+    int n,a;
+    printf("Введите кол-во чисел в массиве: ");
+    scanf("%d", &n);
+    int arr[n];
+    for(int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
+    for(int i=0; i<n; i++){
+        for(int k=0; k<n; k++){
+            if(arr[k]>arr[i]){
+                a=arr[i];
+                arr[i]=arr[k];
+                arr[k]=a;
+            }
+        }
+    }
+    printf("Сортировка выбором:\n");
+    for (int j=0; j<n; j++)
+        printf("[%d] ", arr[j]);
+    return 0;
+}
