@@ -1,0 +1,33 @@
+Задача (Шейкерная сортировка)
+#include <stdio.h>
+void swap(int *pa, int *pb)
+{
+    int c = *pb;
+    *pb = *pa;
+    *pa = c;
+}
+int main()
+{
+    int n, b;
+    printf("Введите кол-во чисел в массиве: ");
+    scanf("%d", &n);
+    if (n % 2 == 1)
+        b = (n - 1) / 2;
+    else
+        b =  n / 2;
+    int a[n];
+    for (int i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+    for (int i = 0; i <= b; i++){
+        for (int k = 0; k < b; k++){
+            if (a[k] > a[k + 1])
+                swap(&a[k], &a[k+1]);
+            if (a[n-k-1] < a[n-k-2])
+                swap(&a[n-k-1], &a[n-k-2]);
+        }
+    }
+    printf("Шейкерная сортировка \n");
+    for (int i = 0; i < n; i++)
+        printf("[%d] ", a[i]);
+    return 0;
+}
