@@ -1,0 +1,23 @@
+#include <stdio.h>
+void reverse(char *str, int begin, int end)
+{
+    int x;
+    x = end - begin;
+    for (int i = 0; i < x/2; begin++, i++, end--){
+       char c = str[end-1];
+       str[end-1] = str[begin];
+       str[begin] = c;
+    }
+}
+int main()
+{
+    int k, n=8, j = 0;
+    char str[] = "dayoffri";
+    printf("%s ", str);
+    scanf("%d", &k);
+    reverse(&str[0], j, k);
+    reverse(&str[0], k, n);
+    reverse(&str[0], j, n);
+    for (int i = 0; i < n; i++)
+        printf("%c", str[i]);
+}
