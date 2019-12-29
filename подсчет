@@ -1,0 +1,29 @@
+Сортировка подсчетом
+#include<stdio.h>
+void sort(int arr[],int n,int max)
+{
+    int count[100]={0};
+    int el,j;
+    for(el=0;el<n;el++)
+        count[arr[el]]++;
+    printf("Отсортированный массив:");
+    for(el=0;el<=max;el++){
+        for(j=1;j<=count[el];j++)
+            printf("%d ",el);
+    }
+}
+int main()
+{
+    int arr[100],n,i,max=0;
+    printf("Введите кол-во элементов массива:\n");
+    scanf("%d",&n);
+    printf("Введите сами элементы:\n");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&arr[i]);
+        if(arr[i]>max)
+            max=arr[i];
+    }
+    sort(arr,n,max);
+    return 0;
+}
