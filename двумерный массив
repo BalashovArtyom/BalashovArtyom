@@ -17,26 +17,26 @@ int main()
     }
 }
 
+
+Задача 2)
 #include<stdio.h>
 #include<stdlib.h>
 int main()
 {
     int i, j, n, k;
-    printf("Введите размер ");
     scanf("%d", &n);
     int arr[n][n];
     for(i=0;i<n;i++){
-        for(j=0;j<n;j++){
-            if (j=i)
-                arr[i][j] = rand() % 100;
-            else
-                arr[i][j] = 0;
-        }
+        for(j=0;j<n;j++)
+            arr[i][j] = 0;
     }
-    printf("Матрица\n");
+    for(i=0;i<n;i++){
+        arr[i][i]=1+rand()%100;
+        arr[i][i+1]=1+rand()%100;
+        arr[i][i-1]=1+rand()%100;
+    }
     for(i=0;i<n;i++){
         for(j=0;j<n;j++)
             printf("%d ",arr[i][j]);
         printf("\n");
     }
-}
