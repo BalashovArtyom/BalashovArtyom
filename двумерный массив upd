@@ -19,3 +19,31 @@ int main()
     }
     free(a);
 }
+
+
+Задача 2)
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int i, j, n, k;
+    scanf("%d", &n);
+    int arr[n][n];
+    int *a;
+    a = malloc(n* sizeof(int*));
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++)
+            arr[i][j] = 0;
+    }
+    for(i=0;i<n;i++){
+        arr[i][i]=1+rand();
+        arr[i][i+1]=1+rand();
+        arr[i][i-1]=1+rand();
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++)
+            printf("%d ",arr[i][j]);
+        printf("\n");
+    }
+    free(a);
+}
