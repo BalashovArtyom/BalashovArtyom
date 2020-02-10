@@ -40,22 +40,33 @@ int func5(int n){
 }
 
 int func6(int p){
-    if (p=2)
-        return 1;
-    if (p%i==0)
-        return 0;
-    
-    
+    int i=2;
+    if(p<2)
+        printf("No");
+    else if(p==2)
+        printf("Yes");
+    else if(p%2==0)
+        printf("No");
+    else if(i<p/2){
+        i++;
+        return func6(p);
+    }
+    else
+        printf("Yes");
 }
+
 int main()
 {
-    //*func1(10);
-    //printf("\n");
-    //if(func2(196))
-      //  printf("Yes");
-    //else
-      //  printf("No");
-    //printf("\n");
-    //printf("%d",func34(10,5));
-    //printf("%d",func5(1010122298));
+    func1(10);
+    printf("\n");
+    if(func2(196))
+      printf("Yes");
+    else
+      printf("No");
+    printf("\n");
+    printf("%d",func34(10,5));
+    printf("\n");
+    printf("%d",func5(1010122298));
+    printf("\n");
+    func6(5);
 }
