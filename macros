@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+#define cube(x) (x)*(x)*(x)
+
+#define del(n) (n)%4==0 ? 1 : 0
+
+#define proz(x,y) (x)*(y)<100 ? 1 : 0
+
+#define NELEMS(a) (sizeof(a)/sizeof(a[0]))
+#define k 8
+
+int main(){
+    int x;
+    scanf("%d", &x);
+    printf("%d\n",cube(x));
+    
+    int z;
+    scanf("%d", &z);
+    printf("%d\n",del(z));
+
+    int x1,y1;
+    scanf("%d %d", &x1, &y1);
+    printf("%d\n", proz(x1,y1));
+    
+    int a[k]={1,2,3,4,5,0,-1,1};
+    printf("%ld", NELEMS(a));
+}
