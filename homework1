@@ -1,0 +1,28 @@
+Задача 1)
+#include <stdio.h>
+int main()
+{
+    double x=3.14159265;
+    printf("x=%.2f\nx=%.4f\nx=%.8f\n", x,x,x);
+    return 0;
+}
+
+Задача 2)
+#include <stdio.h>
+int main()
+{
+    int a,b,c;
+    scanf("%d %d %d",&a,&b,&c);
+    printf("Объём коробки = %d", a*b*c);
+    return 0;
+}
+
+Задача 3)
+#include <stdio.h>
+int main()
+{
+    printf("%%\n");
+    printf("%lu\n", sizeof("hello darkness my old friend"));    // Выведет 29(байт), так как в строке 28 символов(+ символ "\0" в конце строки)
+    return 0;
+}
+
