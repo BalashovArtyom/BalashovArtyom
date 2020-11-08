@@ -1,0 +1,44 @@
+#1
+def alg_euclid(a,b):
+    while b != 0:
+        a,b=b,a%b
+    return a
+print(alg_euclid(1024,456))
+
+#2
+def fib_numbers(i):
+    k = 1
+    if i == 1 or i == 2:
+        return 1
+    if i>2:
+        k = fib_numbers(i-1) + fib_numbers(i-2)
+    return k
+    
+#3
+numbers1 = input().split()                  
+numbers1 = list(map(int, numbers1))
+numbers2 = []
+i = 0
+while i != len(numbers1):
+    k = int(input())
+    numbers2.append(k)
+    i += 1
+numbers12 = list(zip(numbers1,numbers2))
+for elem1, elem2 in numbers12:
+    print(alg_euclid(elem1, elem2))
+    
+#4
+numbers1 = input().split()                  
+numbers1 = list(map(int, numbers1))
+numbers2 = []
+i = 0
+while i != len(numbers1):
+    k = int(input())
+    numbers2.append(k)
+    i += 1
+numbers12 = list(zip(numbers1,numbers2))
+sum_square_numbers = []
+for elem1, elem2 in numbers12:
+    sum_square = elem1*elem1 + elem2*elem2
+    sum_square_numbers.append(sum_square)
+print(max(sum_square_numbers))
