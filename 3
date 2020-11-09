@@ -1,6 +1,0 @@
-def alg_euclid(a,b):
-    while b != 0:
-        a,b=b,a%b
-    return a
-print(alg_euclid(1024,456))
-numbers_nod = [print(alg_euclid(elem1,elem2)) for elem1, elem2 in list(zip(list(map(int, input().split())),list(map(int, input().split()))))]
