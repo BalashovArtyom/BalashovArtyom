@@ -1,0 +1,32 @@
+#include <stdio.h>   
+#include <math.h>
+int main()
+{
+    double a, b, c;
+    double x, x1, x2, D;
+    scanf("%lf", &a);
+    scanf("%lf", &b);
+    scanf("%lf", &c);
+    D=b*b -4*a*c;
+    if(D!=0)
+    {
+        if(D>0)
+        {
+            x1=(-b-sqrt(D))/(2*a);
+            x2=(-b+sqrt(D))/(2*a);
+            printf("x1=%f\n", x1);
+            printf("x2=%f", x2);
+        }
+        else
+        {
+            printf("x1=(%f-%f*i)/%f\n", b*(-1), sqrt(D*(-1)), 2*a);
+            printf("x1=(%f+%f*i)/%f\n", b*(-1), sqrt(D*(-1)), 2*a);
+        }
+    }
+    else
+    {
+        x=-b/(2*a);
+        printf("x1=x2=%f", x);
+    }
+    return 0;
+}
