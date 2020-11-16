@@ -1,0 +1,128 @@
+#include<stdio.h>
+int main() {
+    //0
+    int correct_password, unknown_password;
+    printf("Enter the password, please: ");
+    scanf("%d", &correct_password);
+    printf("Enter the password again, please: ");
+    scanf("%d", &unknown_password);
+    unknown_password == correct_password ? printf("It`s correct!\n") : printf("Wrong!\n");
+    
+    //1
+    int n, sq_sum=0;
+    scanf("%d", &n);
+    while(n<=0)
+    {
+        printf("Wrong input!\n");
+        scanf("%d", &n);
+    }
+    for(int i=0;i<=n;i++)
+    {
+        sq_sum+=i*i;
+    }
+    printf("%d", sq_sum);
+    
+    //2
+    int arr[16];
+    for(int j=0; j<16; j++)
+    {
+        scanf("%d", &arr[j]);
+        if (arr[j]<0 || arr[j]>15)
+        {
+            arr[j]=0;
+            printf("Wrong! Your number is out of range.\n");
+        }
+    }
+    for(int str=0; str<16; str++)
+    {
+        for(int k=0; k<arr[str]; k++)
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+    
+    //3
+    void swap(int *pa, int *pb)
+    {
+        int c = *pb;
+        *pb = *pa;
+        *pa = c;
+    }
+    int a[6];
+    for (int i = 0; i < 6; i++)
+        scanf("%d", &a[i]);
+    for (int i = 0; i <= 3; i++){
+        for (int k = 0; k < 3; k++){
+            if (a[k] > a[k + 1])
+                swap(&a[k], &a[k+1]);
+            if (a[5-k] < a[4-k])
+                swap(&a[5-k], &a[4-k]);
+        }
+    }
+    for (int i = 0; i < 6; i++)
+        printf("[%d] ", a[i]);
+        
+    //4
+    unsigned month;
+    printf("Enter month: ");
+    scanf("%d", &month);
+    switch (month) { 
+    case 1: 
+        printf("January\n"); 
+        break; 
+    case 2:
+        printf("February\n");
+        break;
+    case 3:
+        printf("March\n");
+        break;
+    case 4: 
+        printf("April\n"); 
+        break; 
+    case 5:
+        printf("May\n");
+        break;
+    case 6:
+        printf("June\n");
+        break;
+    case 7: 
+        printf("July\n"); 
+        break; 
+    case 8:
+        printf("August\n");
+        break;
+    case 9:
+        printf("September\n");
+        break;
+    case 10: 
+        printf("October\n"); 
+        break; 
+    case 11:
+        printf("November\n");
+        break;
+    case 12:
+        printf("December\n");
+        break;
+    default: 
+        printf("Wrong!\n"); 
+    }
+    
+    //5
+        unsigned number;
+    printf("Введите кол-во апельсинов: ");
+    scanf("%d", &number);
+    if (number % 10 < 5 && number % 10 > 1)
+    {
+        if(number % 100 < 15 && number % 100 > 11)
+            printf("апельсинов");
+        else
+            printf("апельсина");
+    }
+    else if (number % 100 == 1)
+        printf("апельсин");
+    else
+        printf("апельсинов");
+        
+    return 0;
+}
