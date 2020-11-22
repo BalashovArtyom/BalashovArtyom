@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <math.h>
+#define N 15
+int main()
+{
+    //0
+    float sum = 0, comp = 1, del = 0;
+    float number;
+    for(int i = 0; i<N; i++)
+    {       
+        scanf("%f", &number);
+        sum = sum + number;
+        comp = comp * number;
+    }
+    printf("%f\n", sum/N);           // среднее арифметическое
+    printf("%f\n", sqrt(comp));      // среднее геометрическое
+    for(int i=0; i < N; i++)
+    {
+        scanf("%f", &number);
+        if (number == 0)
+        {
+            printf("Error!");
+            break;
+        }
+        del = del + 1/number;
+    }
+    if(number!=0)
+        printf("%f\n", N/del);       // среднее гармоническое
+        
+    //1
+    char string[10];
+    int len = 0;
+    scanf("%9s", string);
+    while(string[len]!='\0')
+        len++;
+    printf("%s\n", string);
+    printf("%d\n", len);
+    
+    //2
+    char str1[10], str2[10];
+    int j = 0, len1=0, len2=0;
+    scanf("%9s", str1);
+    scanf("%9s", str2);
+    while(str1[len1]!='\0')
+        len1++;
+    while(str2[len2]!='\0')
+        len2++;
+    while(str1[j]==str2[j])
+        j++;
+    if (len1<len2)
+    {
+        if(j==(len1+1))
+        {
+            printf("Равны\n");
+            printf("%d\n", j-1);
+        }
+        else
+        {
+            printf("Не равны\n");
+            printf("%d\n", j);
+        }
+    }
+    else
+    {
+        if(j==(len2+1))
+        {
+            printf("Равны\n");
+            printf("%d\n", j-1);
+        }
+        else
+        {
+            printf("Не равны\n");
+            printf("%d\n", j);
+        }
+    }
+    
+    //3
+        char arr[16][16];
+    int n;
+    for(int k=0; k<16; k++)
+    {
+        scanf("%d", &n);
+        if (n<0 || n>16)
+        {
+            n=0;
+            printf("Wrong! Your number is out of range.\n");
+        }
+        for(int i=0; i<n; i++)
+            arr[k][i] = '*';
+        for(int j=n; j<16; j++)
+            arr[k][j] = ' ';
+    }
+    for(int i=0; i<16; i++)
+    {
+        for(int j=0; j<16; j++)
+            printf("%c", arr[i][j]);
+        printf("\n");
+    }
+    return 0;
+}
