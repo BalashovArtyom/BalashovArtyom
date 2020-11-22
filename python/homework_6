@@ -1,0 +1,29 @@
+#1
+def generator():
+    n = 0
+    while True:
+        yield n
+        n += 1
+        
+#2
+try:
+    int(input())                         #Ввести объект не типа int
+except ValueError as ve:
+    print(f'An error occured: {ve}')
+    
+try:
+    print(p)
+except NameError as ne:
+    print(f'An error occured: {ne}')
+    
+try:
+    print(1+'b')
+except TypeError as te:
+        print(f'An error occured: {te}')
+
+def devide(a, b):                             
+    try:
+        return a / b
+    except ZeroDivisionError as ex:
+        print(f'An error occured: {ex}')       
+devide(4,0)
