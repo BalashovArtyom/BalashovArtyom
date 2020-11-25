@@ -1,0 +1,12 @@
+def quick_sort(numbers):
+    if len(numbers) <= 1:
+        return numbers
+    else:
+        k = numbers[len(numbers)//2]
+    left_numbers = [n for n in numbers if n < k]
+    num = [k] * numbers.count(k)
+    right_numbers = [n for n in numbers if n > k]
+    return quick_sort(left_numbers) + num + quick_sort(right_numbers)
+
+numbers = list(map(int, input().split()))
+print(quick_sort(numbers))
