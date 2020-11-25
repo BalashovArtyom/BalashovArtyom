@@ -1,0 +1,58 @@
+Public Class Form1
+    Dim Fam, Vopr As String
+    Dim B, N As Byte
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Fam = InputBox("Введите имя и фамилию:", "Регистрация")
+        B = MsgBox("Уважаемый " + Fam + ", вы готовы к проверке знаний?", 32 + 4, "Конец регистрации")
+        If B = 7 Then End
+        N = 0
+
+        Vopr = InputBox("Какой объект отвечает за текстовое поле для комментариев?", "1 вопрос")
+        If Vopr = "Label" Then MsgBox("Правильно!", 0, "1 вопрос") Else MsgBox("Неправильно!", 0, "1 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какой объект отвечает за поле для вывода символьной информации?", "2 вопрос")
+        If Vopr = "TextBox" Then MsgBox("Правильно!", 0, "2 вопрос") Else MsgBox("Неправильно!", 0, "2 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какой объект отвечает за создание кнопки и ее настройку?", "3 вопрос")
+        If Vopr = "Button" Then MsgBox("Правильно!", 0, "3 вопрос") Else MsgBox("Неправильно!", 0, "3 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какой объект отвечает за расположение объектов?", "4 вопрос")
+        If Vopr = "Form" Then MsgBox("Правильно!", 0, "4 вопрос") Else MsgBox("Неправильно!", 0, "4 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая функция преобразования типов данных отвечает за преобразование символов в числа?", "5 вопрос")
+        If Vopr = "Val" Then MsgBox("Правильно!", 0, "5 вопрос") Else MsgBox("Неправильно!", 0, "5 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая функция преобразования типов данных отвечает за преобразование чисел в символы?", "6 вопрос")
+        If Vopr = "Str" Then MsgBox("Правильно!", 0, "6 вопрос") Else MsgBox("Неправильно!", 0, "6 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая функция преобразования типов данных преобразует десятичное число в восьмеричное число?", "7 вопрос")
+        If Vopr = "Oct" Then MsgBox("Правильно!", 0, "7 вопрос") Else MsgBox("Неправильно!", 0, "7 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая функция преобразования типов данных преобразует десятичное число в шестнадцатеричное число?", "8 вопрос")
+        If Vopr = "Hex" Then MsgBox("Правильно!", 0, "8 вопрос") Else MsgBox("Неправильно!", 0, "8 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая строковая функция определяет длину строки?", "9 вопрос")
+        If Vopr = "Len" Then MsgBox("Правильно!", 0, "9 вопрос") Else MsgBox("Неправильно!", 0, "9 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая строковая функция отвечает за вырезание левой подстроки?", "10 вопрос")
+        If Vopr = "Left" Then MsgBox("Правильно!", 0, "10 вопрос") Else MsgBox("Неправильно!", 0, "10 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая строковая функция преобразует строку в числовой код символа?", "11 вопрос")
+        If Vopr = "Asc" Then MsgBox("Правильно!", 0, "11 вопрос") Else MsgBox("Неправильно!", 0, "11 вопрос") : N = N + 1
+
+        Vopr = InputBox("Какая функция позволяет вводить данные с диалогового окна?", "12 вопрос")
+        If Vopr = "InputBox" Then MsgBox("Правильно!", 0, "12 вопрос") Else MsgBox("Неправильно!", 0, "12 вопрос") : N = N + 1
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        If N = 0 Or N = 1 Then TextBox1.Text = "5"
+        If N = 2 Or N = 2 Or N = 4 Then TextBox1.Text = "4"
+        If N = 5 Or N = 6 Or N = 7 Then TextBox1.Text = "3"
+        If N = 8 Or N = 9 Or N = 10 Or N = 11 Or N = 12 Then TextBox1.Text = "2"
+
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        TextBox1.Text = " "
+    End Sub
+End Class
