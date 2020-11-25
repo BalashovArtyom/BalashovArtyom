@@ -1,0 +1,19 @@
+def Binary_search(numbers, x):
+    mid = len(numbers) // 2
+    left = 0
+    right = len(numbers) - 1
+    while numbers[mid] != x and left <= right:
+        if x > numbers[mid]:
+            left = mid + 1
+        else:
+            right = mid - 1
+        mid = (left + right) // 2
+    if left > right:
+        print("Такой элемент не найден")
+    else:
+        print("Индекс искомого элемента =", mid)
+
+numbers = list(map(int, input().split()))
+x = int(input())
+print(sorted(numbers))
+Binary_search(sorted(numbers), x)
