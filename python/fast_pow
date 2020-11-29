@@ -1,0 +1,10 @@
+def fast_pow(a, k):
+    res = 1
+    while k!=0:
+        if k%2 == 1:
+            res *= a
+        a=a*a
+        k//=2
+    return res
+
+print(fast_pow(3, 4))
