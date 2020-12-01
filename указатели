@@ -4,6 +4,7 @@
 int main()
 {
     //0
+    /*
     int a = 100;
     const int* p1;
     p1 = &a;
@@ -16,14 +17,19 @@ int main()
     p = &a;
     p4 = &p;
     printf("%d %d %d\n", **p4, *(*p4-1), *(*p4+1));
+    */
     
+    /*
     //1
     int A[3][3] = {1, -2, 3, 4, 5, 6, 7, 8, 9};
-    int *p = A[0];
+    int *pp = A[0];
     int i;
     for(i=0; i<9; i++)
-        printf("%d ", *(p+i));
-        
+        printf("%d ", *(pp+i));
+    printf("\n");
+    */
+    
+    /*
     //2
     char string1[20];
     scanf("%19s", string1);
@@ -49,19 +55,30 @@ int main()
         else
             printf("%d\n", j);
     }
+    */
     
+    /*
     //3
     char str2[16], str1[8], str3[8];
     scanf("%15s", str2);
-    int i, k;
-    for(i=15-strlen(str2), k=0; i!=0; i--, k++)
+    int u, k;
+    for(u=15-strlen(str2), k=0; u!=0; u--, k++)
         str2[14-k] = '*';
     printf("%s", strncat(str1, str2, 8));
-    for (int i=7; i!=-1; i--)
-        printf("%c", str1[i]);
+    for (int u=7; u!=-1; u--)
+        printf("%c", str1[u]);
+    printf("\n");
+    */
+    
     
     //4
-    
+    float num, N=0.0, sum=0.0;
+    while(scanf("%f", &num)==1)
+    {
+        N++;
+        sum = sum + num;
+        printf("%f\n", sum/N);
+    }
     
     return 0;
 }
