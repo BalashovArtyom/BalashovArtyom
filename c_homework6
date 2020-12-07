@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+double sqr(double x)
+{
+    double res = x*x*x;
+    return res;
+}
+
+int fact(int x)
+{
+    int n=1;
+    for(int i=1; i<=x; i++)
+        n = n*i;
+    return n;
+}
+
+int my_strlen(char *str)
+{
+    int i=0;
+    while(str[i] != '\0')
+        i++;
+    return i;
+}
+
+const float RAND_MAX_F = RAND_MAX;
+float get_rand() 
+{
+    return rand() / RAND_MAX_F;
+}
+float get_rand_range(const float min, const float max) 
+{
+    return get_rand() * (max - min) + min;
+}
+
+char arr_make(int *p, int length) 
+{
+    int i;
+    srand(time(NULL));
+    for (i=0; i<length; i++)
+        *(p+i) = rand();
+    if (length%2 == 0)
+        return 'A';
+    if (length%2 == 1)
+        return 'C';
+}
+
+int main()
+{
+    //0
+    /*double num;
+    printf("Введите число: ");
+    scanf("%lf", &num);
+    printf("%lf\n", sqr(num));*/
+    
+    //1
+    /*int num;
+    printf("Введите число: ");
+    scanf("%d", &num);
+    printf("%d\n", fact(num));*/
+    
+    //2
+    /*char str[128];
+    printf("Введите строку: ");
+    scanf("%127s", str);
+    printf("Длина строки: %d\n", my_strlen(str));
+    printf("Длина строки: %lu\n", strlen(str));*/
+    
+    //3
+    /*srand(time(NULL));
+    float r, rm = RAND_MAX;
+    r = (rand() / rm)*3;
+    printf("%f\n", r);*/
+    
+    //4
+    /*printf("%f\n", get_rand_range(0.509,0.51));*/
+    
+    //5
+    /*int length;
+    scanf("%d", &length);
+    int arrI[length], i;
+    arr_make(arrI, length);
+    for (i=0; i<length; i++)
+        printf("%d ", arrI[i]);
+    printf("\n");
+    printf("%c", arr_make(arrI, length));*/
+    
+    return 0;
+}
