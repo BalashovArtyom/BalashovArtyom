@@ -1,0 +1,69 @@
+class Complex():
+    def __init__(self, real=0, imaginary=0):
+        self.real=real
+        self.imaginary=imaginary
+    
+    def __str__(self):
+        return '{} + i*{}'.format(self.real, self.imaginary)
+    
+    def __add__(self, obj):
+        res = Complex()
+        
+        if type(obj) == type(self):
+            res.real = obj.real + self.real
+            res.imaginary = obj.imaginary + self.imaginary
+            
+        else:
+            res.real = self.real + obj
+            res.imaginary = self.imaginary
+            
+        return res
+    
+    def __sub__(self, obj):
+        res = Complex()
+        
+        if type(obj) == type(self):
+            res.real = self.real - obj.real
+            res.imaginary = self.imaginary - obj.imaginary
+            
+        else:
+            res.real = self.real - obj
+            res.imaginary = self.imaginary
+            
+        return res
+    
+    def __mul__(self, obj):
+        res = Complex()
+        
+        if type(obj) == type(self):
+            res.real = self.real*obj.real - self.imaginary*obj.imaginary
+            res.imaginary = self.real*obj.imaginary + self.imaginary*obj.real
+        
+        else:
+            res.real = self.real * obj
+            res.imaginary = self.imaginary * obj
+        
+        return res
+    
+    def __truediv__(self, obj):
+        res = Complex()
+        
+        if type(obj) == type(self):
+            res.real = (self.real*obj.real + self.imaginary*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
+            res.imaginary = (self.imaginary*obj.real-self.real*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
+            
+        else:
+            res.real = self.real / obj
+            res.imaginary = self.imaginary / obj
+        
+        return res
+
+
+z1 = Complex(2,3)
+z2 = Complex(1,1)
+print(z1)
+print(z2)
+print(z1+z2)
+print(z1-z2)
+print(z1*z2)
+print(z1/z2)
