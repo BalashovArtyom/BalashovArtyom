@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 const float RAND_MAX_F = RAND_MAX;
 float get_rand() 
@@ -89,5 +90,5 @@ void main()
             break;
     }
     printf("%d\n", k);
-    printf("%d\n", len);
+    printf("%f\n", (double)len/(double)k);
 }
