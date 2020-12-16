@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+
+const float RAND_MAX_F = RAND_MAX;
+float get_rand() 
+{
+    return rand() / RAND_MAX_F;
+}
+float get_rand_range(const float min, const float max) 
+{
+    return get_rand() * (max - min) + min;
+}
+
+void func(double *p, int N)
+{
+    p = (double*) malloc(N * sizeof(double));
+    for(int i=0; i<N; i++)
+        p[i] = get_rand_range(-2,5);
+    for(int i=0; i<N; i++)
+        printf("%f\n", p[i]);
+    free(p);
+    
+}
+
+void main()
+{
+    //0
+    /*
+    int length;
+    int *p;
+    scanf("%d", &length);
+    p = (int*) malloc(length * sizeof(int));
+    for(int i=0; i<length; i++)
+        scanf("%d", &p[i]);
+    for(int i=0; i<length; i++)
+        printf("%d", p[i]);
+    free(p);
+    */
+    
+    //1
+    /*
+    int *a;  
+    int i, j, n, m;
+    printf("Введите количество строк: ");
+    scanf("%d", &n);
+    printf("Введите количество столбцов: ");
+    scanf("%d", &m);
+    a = (int*)malloc(n*m * sizeof(int));
+    for (i = 0; i<n; i++)  
+    {
+        for (j = 0; j<m; j++)
+        {
+            printf("a[%d][%d] = ", i, j);
+            scanf("%d", (a + i*m + j));
+        }
+    }
+    for (i = 0; i<n; i++)  
+    {
+        for (j = 0; j<m; j++) 
+            printf("%5d ", *(a + i*m + j));
+        printf("\n");
+    }
+    free(a);
+    */
+    
+    //2
+    /*
+    char p[5] = {};
+    func(*p, 6);
+    */
+    
+    // 3 и 4
+    char buffer[256], *str[256];
+    int k=0;
+    int len=0;
+    for(int i=0; i<256; i++)
+    {
+        scanf("%255s", buffer);
+        if(strcmp(buffer, "STOP") != 0)
+        {
+            str[i]=(char*) malloc((strlen(buffer)+1) * sizeof(char));
+            strcpy(str[i], buffer);
+            k++;
+            len+=strlen(buffer);
+        }
+        else
+            break;
+    }
+    printf("%d\n", k);
+    printf("%d\n", len);
+}
