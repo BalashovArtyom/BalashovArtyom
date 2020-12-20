@@ -14,8 +14,9 @@ float get_rand_range(const float min, const float max)
     return get_rand() * (max - min) + min;
 }
 
-void func(double *p, int N)
+void func(char pp, int N)
 {
+    double *p;
     p = (double*) malloc(N * sizeof(double));
     for(int i=0; i<N; i++)
         p[i] = get_rand_range(-2,5);
@@ -34,9 +35,7 @@ void main()
     scanf("%d", &length);
     p = (int*) malloc(length * sizeof(int));
     for(int i=0; i<length; i++)
-        scanf("%d", &p[i]);
-    for(int i=0; i<length; i++)
-        printf("%d", p[i]);
+        printf("%d\n", rand());
     free(p);
     */
     
@@ -54,14 +53,8 @@ void main()
         for (j = 0; j<m; j++)
         {
             printf("a[%d][%d] = ", i, j);
-            scanf("%d", (a + i*m + j));
+            printf("%d\n", rand());
         }
-    }
-    for (i = 0; i<n; i++)  
-    {
-        for (j = 0; j<m; j++) 
-            printf("%5d ", *(a + i*m + j));
-        printf("\n");
     }
     free(a);
     */
@@ -73,10 +66,12 @@ void main()
     */
     
     // 3 и 4
+    /*
     char buffer[256], *str[256];
     int k=0;
     int len=0;
-    for(int i=0; i<256; i++)
+    int i=0;
+    while(1>0)
     {
         scanf("%255s", buffer);
         if(strcmp(buffer, "STOP") != 0)
@@ -88,7 +83,9 @@ void main()
         }
         else
             break;
+        i++;
     }
     printf("%d\n", k);
     printf("%f\n", (double)len/(double)k);
+    */
 }
