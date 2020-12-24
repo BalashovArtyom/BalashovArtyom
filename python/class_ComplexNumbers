@@ -1,10 +1,22 @@
+import math
 class Complex():
-    def __init__(self, real=0, imaginary=0):
-        self.real=real
-        self.imaginary=imaginary
+    def __init__(self, real=0, imaginary=0, mode = 'norm'):
+        self.mode = mode
+        if mode == 'norm':
+            self.real = real
+            self.imaginary = imaginary
+            self.module = self.module()
+            self.arg = self.arg()
+        elif mode == 'trig':
+            self.module = x
+            self.arg = y
+            
     
     def __str__(self):
-        return '{} + i*{}'.format(self.real, self.imaginary)
+        if self.mode == 'norm':
+            return '{} + i*{}'.format(self.real, self.imaginary)
+        if self.mode == 'trig':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module, self.arg, self.arg)
     
     def __add__(self, obj):
         res = Complex()
@@ -57,13 +69,55 @@ class Complex():
             res.imaginary = self.imaginary / obj
         
         return res
+    
+    def to_trig(self):
+        return '{}*(cos({}) + i*sin({}))'.format(self.module, self.arg, self.arg)
+          
+    def to_norm(self):
+        return '{} + i*{}'.format(self.module*math.cos(self.arg*3.1415/180), self.module*math.sin(self.arg*3.1415/180))
+        
+    def module(self):
+        res = (self.real*self.real + self.imaginary*self.imaginary)**0.5
+        return res
+        
+    def arg(self):
+        res = math.atan2(self.imaginary, self.real)
+        return res
+        
+    #def power(self):
+    
+    #def sqrt(self):
 
 
-z1 = Complex(2,3)
-z2 = Complex(1,1)
-print(z1)
-print(z2)
-print(z1+z2)
-print(z1-z2)
-print(z1*z2)
-print(z1/z2)
+#z1 = Complex(2,3, mode='norm')
+#z2 = Complex(1,1, mode='norm')
+#print(z1)
+#print(z2)
+#print(z1+z2)
+#print(z1-z2)
+#print(z1*z2)
+#print(z1/z2)
+#print(z1.module)
+#print(z2.module)
+#print(z1.arg)
+#print(z2.arg)
+
+#x=int(input())
+#y=int(input())
+#z3 = Complex(x,y,mode = 'norm')
+#print(z3)
+#x=int(input())
+#y=int(input())
+#z4 = Complex(x,y,mode = 'trig')
+#print(z4)
+
+#x=int(input())
+#y=int(input())
+#z5 = Complex(x,y,mode = 'norm')
+#print(z5)
+#print(z5.to_trig())
+x=int(input())
+y=int(input())
+z6 = Complex(x,y,mode = 'trig')
+print(z6)
+print(z6.to_norm())
