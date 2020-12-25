@@ -1,0 +1,178 @@
+import math
+class Complex():
+    def __init__(self, real=0, imaginary=0, mode = 'norm'):
+        self.mode = mode
+        if mode == 'norm':
+            self.real = real
+            self.imaginary = imaginary
+            self.module = self.module()
+            self.arg = self.arg()
+        elif mode == 'trig':
+            self.module = x
+            self.arg = y
+            
+    
+    def __str__(self):
+        if self.mode == 'norm':
+            return '{} + i*{}'.format(self.real, self.imaginary)
+        if self.mode == 'trig':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module, self.arg, self.arg)
+    
+    def __add__(self, obj):
+        res = Complex()
+        
+        if self.mode == 'norm' and obj.mode == 'norm':
+            if type(obj) == type(self):
+                res.real = obj.real + self.real
+                res.imaginary = obj.imaginary + self.imaginary
+                
+            else:
+                print(obj.to_norm())
+                res.real = self.real + obj
+                res.imaginary = self.imaginary
+                
+        elif self.mode == 'norm' and obj.mode == 'trig':
+            obj.to_norm()
+            res.real = self.real + obj.module*math.cos(obj.arg*3.1415/180)
+            res.imaginary = self.imaginary + obj.module*math.sin(obj.arg*3.1415/180)
+
+        elif self.mode == 'trig' and obj.mode == 'norm':
+            self.to_norm()
+            res.real = self.module*math.cos(self.arg*3.1415/180) + obj.real
+            res.imaginary = self.module*math.sin(self.arg*3.1415/180) + obj.imaginary
+            
+        else:
+            self.to_norm()
+            obj.to_norm()
+            res.real = self.module*math.cos(self.arg*3.1415/180) + obj.module*math.cos(obj.arg*3.1415/180)
+            res.imaginary = self.module*math.sin(self.arg*3.1415/180) + obj.module*math.sin(obj.arg*3.1415/180)
+        
+        return res
+    
+    def __sub__(self, obj):
+        res = Complex()
+        
+        if self.mode == 'norm' and obj.mode == 'norm':
+            if type(obj) == type(self):
+                res.real = obj.real - self.real
+                res.imaginary = obj.imaginary - self.imaginary
+                
+            else:
+                print(obj.to_norm())
+                res.real = self.real - obj
+                res.imaginary = self.imaginary
+                
+        elif self.mode == 'norm' and obj.mode == 'trig':
+            obj.to_norm()
+            res.real = self.real - obj.module*math.cos(obj.arg*3.1415/180)
+            res.imaginary = self.imaginary - obj.module*math.sin(obj.arg*3.1415/180)
+
+        elif self.mode == 'trig' and obj.mode == 'norm':
+            self.to_norm()
+            res.real = self.module*math.cos(self.arg*3.1415/180) - obj.real
+            res.imaginary = self.module*math.sin(self.arg*3.1415/180) - obj.imaginary
+            
+        else:
+            self.to_norm()
+            obj.to_norm()
+            res.real = self.module*math.cos(self.arg*3.1415/180) - obj.module*math.cos(obj.arg*3.1415/180)
+            res.imaginary = self.module*math.sin(self.arg*3.1415/180) - obj.module*math.sin(obj.arg*3.1415/180)
+        
+        return res
+    
+    def __mul__(self, obj):
+        res = Complex()
+        
+        if type(obj) == type(self):
+            res.real = self.real*obj.real - self.imaginary*obj.imaginary
+            res.imaginary = self.real*obj.imaginary + self.imaginary*obj.real
+        
+        else:
+            res.real = self.real * obj
+            res.imaginary = self.imaginary * obj
+        
+        return res
+    
+    def __truediv__(self, obj):
+        res = Complex()
+        
+        if type(obj) == type(self):
+            res.real = (self.real*obj.real + self.imaginary*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
+            res.imaginary = (self.imaginary*obj.real-self.real*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
+            
+        else:
+            res.real = self.real / obj
+            res.imaginary = self.imaginary / obj
+        
+        return res
+    
+    def to_trig(self):
+        res = Complex()
+        if self.mode == 'trig':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module, self.arg, self.arg)
+        elif self.mode == 'norm':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module, self.arg*180/3.1415, self.arg*180/3.1415)
+          
+    def to_norm(self):
+        res = Complex()
+        if self.mode == 'trig':
+            res.real = self.module*math.cos(self.arg*3.1415/180)
+            res.imaginary = self.module*math.sin(self.arg*3.1415/180)
+            return res
+        elif self.mode == 'norm':
+            return '{} + i*{}'.format(self.real, self.imaginary)
+        
+    def module(self):
+        res = (self.real*self.real + self.imaginary*self.imaginary)**0.5
+        return res
+        
+    def arg(self):
+        res = math.atan2(self.imaginary, self.real)
+        return res
+        
+    #def power(self):
+    
+    #def sqrt(self):
+
+
+#z1 = Complex(2,3, mode='norm')           #сложение, вычитание, умножение, деление, аргумент, модуль
+#z2 = Complex(1,1, mode='norm')
+#print(z1)
+#print(z2)
+#print(z1+z2)
+#print(z1-z2)
+#print(z1*z2)
+#print(z1/z2)
+#print(z1.module)
+#print(z2.module)
+#print(z1.arg)
+#print(z2.arg)
+
+#x=int(input())                            #запись в нормальной и тригонаметрической форме
+#y=int(input())
+#z3 = Complex(x,y,mode = 'norm')
+#print(z3)
+#x=int(input())
+#y=int(input())
+#z4 = Complex(x,y,mode = 'trig')
+#print(z4)
+
+#x=int(input())                             #перевод в тригонаметрическую форму, перевод в обычную форму
+#y=int(input())
+#z5 = Complex(x,y,mode = 'norm')
+#print(z5)
+#print(z5.to_trig())
+#x=int(input())
+#y=int(input())
+#z6 = Complex(x,y,mode = 'trig')
+#print(z6)
+#print(z6.to_norm())
+
+#x=int(input())                              #улучшаем сложение и вычитание
+#y=int(input())
+#z7 = Complex(x,y, mode='trig')
+#x=int(input())
+#y=int(input())
+#z8 = Complex(x,y, mode='trig')
+#print(z7+z8)
+#print(z7-z8)
