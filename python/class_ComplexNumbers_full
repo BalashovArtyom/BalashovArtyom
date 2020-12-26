@@ -27,7 +27,6 @@ class Complex():
                 res.imaginary = obj.imaginary + self.imaginary
                 
             else:
-                print(obj.to_norm())
                 res.real = self.real + obj
                 res.imaginary = self.imaginary
                 
@@ -58,7 +57,6 @@ class Complex():
                 res.imaginary = obj.imaginary - self.imaginary
                 
             else:
-                print(obj.to_norm())
                 res.real = self.real - obj
                 res.imaginary = self.imaginary
                 
@@ -83,31 +81,39 @@ class Complex():
     def __mul__(self, obj):
         res = Complex()
         
-        if type(obj) == type(self):
-            res.real = self.real*obj.real - self.imaginary*obj.imaginary
-            res.imaginary = self.real*obj.imaginary + self.imaginary*obj.real
+        if self.mode == 'norm' and obj.mode == 'norm':
+            if type(obj) == type(self):
+                res.real = self.real*obj.real - self.imaginary*obj.imaginary
+                res.imaginary = self.real*obj.imaginary + self.imaginary*obj.real
         
-        else:
-            res.real = self.real * obj
-            res.imaginary = self.imaginary * obj
-        
-        return res
+            else:
+                res.real = self.real * obj
+                res.imaginary = self.imaginary * obj
+            
+            return res
+                
+        elif self.mode == 'trig' and obj.mode == 'trig':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module*obj.module, self.arg+obj.arg, self.arg+obj.arg)
+            
     
     def __truediv__(self, obj):
         res = Complex()
         
-        if type(obj) == type(self):
-            res.real = (self.real*obj.real + self.imaginary*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
-            res.imaginary = (self.imaginary*obj.real-self.real*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
+        if self.mode == 'norm' and obj.mode == 'norm':
+            if type(obj) == type(self):
+                res.real = (self.real*obj.real+self.imaginary*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
+                res.imaginary = (self.imaginary*obj.real-self.real*obj.imaginary)/(obj.real*obj.real+obj.imaginary*obj.imaginary)
             
-        else:
-            res.real = self.real / obj
-            res.imaginary = self.imaginary / obj
+            else:
+                res.real = self.real / obj
+                res.imaginary = self.imaginary / obj
         
-        return res
+            return res
+        
+        elif self.mode == 'trig' and obj.mode == 'trig':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module/obj.module, self.arg-obj.arg, self.arg-obj.arg)
     
     def to_trig(self):
-        res = Complex()
         if self.mode == 'trig':
             return '{}*(cos({}) + i*sin({}))'.format(self.module, self.arg, self.arg)
         elif self.mode == 'norm':
@@ -130,9 +136,23 @@ class Complex():
         res = math.atan2(self.imaginary, self.real)
         return res
         
-    #def power(self):
+    def power(self, n):
+        if self.mode == 'trig':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module**n, self.arg*n, self.arg*n)
+        
+        elif self.mode == 'norm':
+            return '{}*(cos({}) + i*sin({}))'.format(self.module**n, (self.arg*180/3.1415)*n, (self.arg*180/3.1415)*n)
+            
     
-    #def sqrt(self):
+    def sqrt(self, n):
+        if self.mode == 'trig':
+            for k in range(0,n):
+                print('{}*(cos({}) + i*sin({}))'.format(self.module**(1/n), (self.arg+360*k)/n, (self.arg+360*k)/n))
+        
+        if self.mode == 'norm':
+            for k in range(0,n):
+                print('{}*(cos({}) + i*sin({}))'.format(self.module**(1/n), (self.arg*180/3.1415+360*k)/n, (self.arg*180/3.1415+360*k)/n))
+        
 
 
 #z1 = Complex(2,3, mode='norm')           #сложение, вычитание, умножение, деление, аргумент, модуль
@@ -176,3 +196,26 @@ class Complex():
 #z8 = Complex(x,y, mode='trig')
 #print(z7+z8)
 #print(z7-z8)
+
+#x=int(input())                              #улучшаем умножение и деление
+#y=int(input())
+#z9 = Complex(x,y, mode='trig')
+#x=int(input())
+#y=int(input())
+#z10 = Complex(x,y, mode='trig')
+#print(z9*z10)
+#print(z9/z10)
+
+#x=int(input())                               #возведение в степень 
+#y=int(input())
+#z11 = Complex(x,y, mode='trig')
+#print(z11.power(4))
+#x=int(input())                               
+#y=int(input())
+#z12 = Complex(x,y, mode='norm')
+#print(z12.power(2))
+
+#x=int(input())                              #взятие корня 
+#y=int(input())
+#z13 = Complex(x,y, mode='norm')
+#print(z13.sqrt(2))
