@@ -1,0 +1,41 @@
+class Matrix:
+    def __init__(self, n, m):
+        self.n = n
+        self.m = m
+        
+        
+    def read(self, filename):
+        f = open(filename, "r")
+        if len(list(f.readline().split())) == self.m and len(f.readlines()) == self.n-1:   
+            f.seek(0)
+            matrix.clear()
+            for line in f:
+                l = list(map(int, line.split()))
+                matrix.append(l)
+            return matrix
+        else:
+            return 0
+        f.close()
+        
+        
+        
+    def write(self):
+        for i in matrix:
+            for j in i:
+                print(j, end = '\t')
+            print()
+        
+        
+    #def __add__(self, obj): 
+        
+    #def __sub__(self, obj):
+        
+    #def __mul__(self, obj):
+        
+    #def transpose(self, inplace=False):
+        
+    #def trace(self):
+        
+m1 = Matrix(5,5)
+print(m1.read("matrix.txt"))
+print(m1.write())
