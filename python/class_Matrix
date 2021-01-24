@@ -1,41 +1,160 @@
 class Matrix:
-    def __init__(self, n, m):
-        self.n = n
-        self.m = m
+    def __init__(self, body):
+        self.body = body
         
+    def nrow(self):
+        return len(self.body)
+
+    def ncol(self):
+        return len(self.body[0])
+
+    def __str__(self):
+        for i in range(self.nrow()):
+            s = [g for g in self.body[i]]
+            for j in range(len(s)):
+                print('[{}] '.format(s[j]), end="")
+            print('\n', end="")
+        return ''
+    
+    def __add__(self1, self2):
+        if (self1.ncol() == self2.ncol()) and (self1.nrow() == self2.nrow()):
+            a1 = []
+            for i in range(self1.nrow()):
+                s1 = [g1 for g1 in self1.body[i]]
+                s2 = [g2 for g2 in self2.body[i]]
+                b1 = []
+                for j in range(len(s1)):
+                    b1.append(s1[j] + s2[j])
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res
+        else: 
+            return 'None'
         
-    def read(self, filename):
-        f = open(filename, "r")
-        if len(list(f.readline().split())) == self.m and len(f.readlines()) == self.n-1:   
-            f.seek(0)
-            matrix.clear()
-            for line in f:
-                l = list(map(int, line.split()))
-                matrix.append(l)
-            return matrix
+    def __sub__(self1, self2):
+        if (self1.ncol() == self2.ncol()) and (self1.nrow() == self2.nrow()):
+            a1 = []
+            for i in range(self1.nrow()):
+                s1 = [g1 for g1 in self1.body[i]]
+                s2 = [g2 for g2 in self2.body[i]]
+                b1 = []
+                for j in range(len(s1)):
+                    b1.append(s1[j] - s2[j])
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res
+        else: 
+            return 'None'        
+        
+    def __mul__(self1, self2):
+        if (type(self2) == float) or (type(self2) == int):
+            a1 = []
+            for i in range(self1.nrow()):
+                s = [g for g in self1.body[i]]
+                b1 = []
+                for j in range(len(s)):
+                    b1.append(s[j]*self2)
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res
+        elif type(self2) == Matrix:
+            if self1.ncol() == self2.nrow():
+                a1 = []
+                for i in range(self1.nrow()):
+                    b = []
+                    for g in range(self2.ncol()):
+                        s = 0
+                        for j in range(self1.ncol()):
+                            s = s + self1.body[i][j] * self2.body[j][g]
+                        b.append(s)
+                    a1.append(b)
+                m_res = Matrix(a1)
+                return m_res
+            else:
+                return 'None1'
         else:
-            return 0
-        f.close()
-        
-        
-        
-    def write(self):
-        for i in matrix:
-            for j in i:
-                print(j, end = '\t')
-            print()
-        
-        
-    #def __add__(self, obj): 
-        
-    #def __sub__(self, obj):
-        
-    #def __mul__(self, obj):
-        
-    #def transpose(self, inplace=False):
-        
-    #def trace(self):
-        
-m1 = Matrix(5,5)
-print(m1.read("matrix.txt"))
-print(m1.write())
+            return 'None2'
+
+
+    def mul_line(self, i, k, inplace=False):
+            a1 = []
+            for g in range(self.nrow()):
+                b1 = []
+                for h in range(self.ncol()):
+                    if g == i:
+                        b1.append(self.body[g][h]*k)
+                    else:
+                        b1.append(self.body[g][h])
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res 
+            
+            
+    def mul_col(self, j, k, inplace=False):
+            a1 = []
+            for g in range(self.nrow()):
+                b1 = []
+                for h in range(self.ncol()):
+                    if h == j:
+                        b1.append(self.body[g][h]*k)
+                    else:
+                        b1.append(self.body[g][h])
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res
+            
+            
+    def transpon(self, inplace=False):
+            a1 = []
+            for i in range(self.ncol()):
+                b1 = []
+                for j in range(self.nrow()):
+                    b1.append(self.body[j][i])
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res
+            
+            
+    def trace(self):
+        if self.nrow() == self.ncol():
+            res = 0
+            j = 0
+            for i in range(self.ncol()):
+                res += self.body[i][j]
+                j += 1
+            return res
+        else:
+            return 'Error!'
+
+    
+    def up_trig_mat(self, inplace = False):
+        if (self.ncol() == self.nrow()):
+            a1 = []
+            for g in range(self.nrow()):
+                b1 = []
+                for h in range(self.ncol()):
+                    if g - h >= 1:
+                        b1.append(0)
+                    else:
+                        b1.append(self.body[g][h])
+                a1.append(b1)
+            m_res = Matrix(a1)
+            return m_res 
+            
+
+                
+a = [[1, 1, 1], [2, 1, 1], [1, 1, 4]]         
+b = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+ 
+m1 = Matrix(a)
+m2 = Matrix(b)
+print(m1)
+print(m2)
+print(m1+m2)
+print(m1-m2)
+print(m1.mul_line(0, 100, False))
+print(m1.mul_col(0, 100, False))
+print(m1*m2)
+print(m1.trace())
+print(m2.transpon())
+print(m2.up_trig_mat())
