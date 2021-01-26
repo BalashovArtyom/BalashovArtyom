@@ -1,0 +1,177 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+void rand_scan(int n, int m, int r, int p, int a[n][m][r][p])
+{
+    srand(time(0)); 
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            for (int k = 0; k < r; k++)
+                for (int q = 0; q < p; q++)
+                    a[i][j][k][q] = rand();
+}
+
+void main(){
+    const int N = 100;
+    const int M = 110;
+    const int R = 120;
+    const int P = 130;
+
+    clock_t begin, end;
+    double time_spent;
+
+    begin = clock();
+    // ===============================
+    int ****pp1;
+    pp1 = (int****)malloc(N * sizeof(int***));
+    for(int i = 0; i < N; i++){
+        pp1[i] = (int***)malloc(M * sizeof(int**));
+        for(int j = 0; j < M; j++){
+            pp1[i][j] = (int**)malloc(R * sizeof(int*));
+            for (int u = 0; u < R; u++)
+                pp1[i][j][u] = (int*)malloc(P * sizeof(int));
+        }
+    }
+    
+    srand(time(0)); 
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < M; j++){
+            for (int k = 0; k < R; k++){
+                for (int q = 0; q < P; q++)
+                    pp1[i][j][k][q] = rand();
+            }
+        }
+    }
+
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < M; j++){
+            for (int u = 0; u < R; u++)
+                free(pp1[i][j][u]);
+        }
+    }
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < M; j++)
+            free(pp1[i][j]);
+    } 
+    for(int i = 0; i < N; i++)
+        free(pp1[i]);
+    free(pp1);
+    // ===============================
+    // N+1 раз
+    // ===============================
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("N+1: \t%.8f\n", time_spent);
+
+
+
+    begin = clock();
+    // ===============================
+    int**** p2;
+    p2 = (int****)malloc(N * M * R * P * sizeof(int));
+    
+    srand(time(0)); 
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < M; j++){
+            for (int k = 0; k < R; k++){
+                for (int q = 0; q < P; q++)
+                    p2[i*N + j*M + k*R + q] = rand(); 
+            }
+        }
+    }
+
+    free(p2);
+    // ===============================
+    // 1 раз
+    // ===============================
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("1: \t%.8f\n", time_spent);
+
+
+
+    begin = clock();
+    // ===============================
+    int**** pppp3;
+    int*** ppp3;
+    int** pp3;
+    int* p3;
+    pppp3 = (int****)malloc(N * sizeof(int***));
+    ppp3 = (int***)malloc(N * M * sizeof(int**));
+    pp3 = (int**)malloc(N * M * R * sizeof(int*));
+    p3 = (int*)malloc(N * M * R * P * sizeof(int));
+
+    for(int i = 0; i < N; i++){
+        pppp3[i] = ppp3 + i * M;
+        for(int j = 0; j < M; j++){
+            ppp3[j] = pp3 + j * N;
+            for(int u = 0; u < R; u++)
+                pp3[u] = p3 + u*R;
+        }
+    }
+    
+    srand(time(0)); 
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < M; j++){
+            for (int k = 0; k < R; k++){
+                for (int q = 0; q < P; q++)
+                    p3[q] = rand();
+            }
+        }
+    }
+
+    free(pppp3);
+    free(ppp3);
+    free(pp3);
+    free(p3);
+    // ===============================
+    // 2 раза
+    // ===============================
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("2: \t%.8f\n", time_spent);
+
+
+
+    begin = clock();
+    // ===============================
+    int**** p4;
+    int*** help1;
+    int** help2;
+    int* help3; 
+    
+    p4 = (int****)malloc(N*sizeof(int***)+N*M*sizeof(int**)+N*M*R*sizeof(int*)+N*M*R*P*sizeof(int));
+    help1 = (int***)(p4 + N);
+    help2 = (int**)(p4 + N + N*M);
+    help3 = (int*)(p4 + N + N*M + N*M*R);
+
+    for (int i = 0; i < M; i++){
+        p4[i] = help1 + i*N;
+        for (int j = 0; j < N; j++){
+            p4[i][j] = help2 + j*N*M;
+            for (int u = 0; u < R; u++)
+                p4[i][j][u] = help3 + u*N*M*R;
+        }
+    }
+    
+    srand(time(0)); 
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < M; j++){
+            for (int k = 0; k < R; k++){
+                for (int q = 0; q < P; q++)
+                    p3[q] = rand();
+            }
+        }
+    }    
+
+    free(p4);
+    // ===============================
+    // 1 раз
+    // ===============================
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("1: \t%.8f\n", time_spent);
+
+}
