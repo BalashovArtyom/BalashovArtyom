@@ -1,3 +1,4 @@
+import copy
 class Matrix:
     def __init__(self, body):
         self.body = body
@@ -140,9 +141,143 @@ class Matrix:
                 a1.append(b1)
             m_res = Matrix(a1)
             return m_res 
+    
+    
+    def addmul_line(self, i, j, k, inplace=False):
+        a1 = []
+        for g in range(self.nrow()):
+            b1 = []
+            for h in range(self.ncol()):
+                if g == i:
+                    b1.append(self.body[i][h] + (self.body[j][h] * k))
+                else:
+                    b1.append(self.body[g][h])
+            a1.append(b1)
+        m_res = Matrix(a1)
+        return m_res
+
+        
+    def addmul_col(self, i, j, k, inplace=False):
+        a1 = []
+        for g in range(self.nrow()):
+            b1 = []
+            for h in range(self.ncol()):
+                if h == i:
+                    b1.append(self.body[g][i] + (self.body[g][j] * k))
+                else:
+                    b1.append(self.body[g][h])
+            a1.append(b1)
+        m_res = Matrix(a1)
+        return m_res
+        
+        
+    def exchange_l(self, i, j, inplace=False):
+        a1 = []
+        for g in range(self.nrow()):
+            b1 = []
+            for h in range(self.ncol()):
+                if g == i:
+                    b1.append(self.body[j][h])
+                elif g == j:
+                    b1.append(self.body[i][h])
+                else:
+                    b1.append(self.body[g][h])
+            a1.append(b1)
+        m_res = Matrix(a1)
+        return m_res
+      
+    
+    def exchange_c(self, i, j, inplace=False):
+        a1 = []
+        for g in range(self.nrow()):
+            b1 = []
+            for h in range(self.ncol()):
+                if h == i:
+                    b1.append(self.body[g][j])
+                elif h == j:
+                    b1.append(self.body[g][i])
+                else:
+                    b1.append(self.body[g][h])
+            a1.append(b1)
+        m_res = Matrix(a1)
+        return m_res
+    
+    
+    def det(self):
+        res = 1
+        v = 0
+        W = copy.deepcopy(self)
+        for k in range(W.ncol()):
+            maxx = k
+            for i in range(k, W.nrow()):
+                if W.body[maxx][k] < W.body[i][k]:
+                    maxx = i
+            W.exchange_l(maxx, k, True)
+            v += 1
+            for i in range(k+1, W.nrow()):
+                t = copy.deepcopy(W.body[k][k])
+                t = (W.body[i][k] / t) * (-1)
+                W.addmul_line(i, k, t, True)
+            res *= W.body[k][k]
+        return res * ((-1) ** v)
+
+    
+    def inverse(self):
+        if self.det() == 0:
+            return "Error!"
+        else:
+            a1 = []
+            for i in range(self.nrow()):
+                b1 = []
+                for j in range(self.ncol()):
+                    if i == j:
+                        b1.append(1)
+                    else:
+                        b1.append(0)
+                a1.append(b1)
+            I = Matrix(a1)
+            return SLAY(self, I)
             
 
-                
+def SLAY(A, c):
+    S = copy.deepcopy(A)
+    b = copy.deepcopy(c)
+    for k in range(S.ncol()-1):
+        maxx = k
+        for i in range(k, S.nrow()):
+            if S.body[maxx][k] < S.body[i][k]:
+                maxx = i
+        S.exchange_l(maxx, k, True)
+        b.exchange_l(maxx, k, True)
+        for i in range(k+1, S.nrow()):
+            t = copy.deepcopy(S.body[k][k])
+            t = (S.body[i][k] / t) * (-1)
+            S.addmul_line(i, k, t, True)
+            b.addmul_line(i, k, t, True)
+            if S.body[k][k] != 1:
+                t = 1 / S.body[k][k]
+                S.mul_line(k, t, True)
+                b.mul_line(k, t, True)
+
+    for k in reversed(range(S.ncol())):
+        maxx = k
+        '''for i in reversed(range(k)):
+            if S.body[maxx][k] < S.body[i][k]:
+                maxx = i
+        S.exchange_l(maxx, k, True)
+        b.exchange_l(maxx, k,  True)'''
+        for i in reversed(range(k)):
+            t = copy.deepcopy(S.body[k][k])
+            t = (S.body[i][k] / t) * (-1)
+            S.addmul_line(i, k, t, True)
+            b.addmul_line(i, k, t, True)
+            if S.body[k][k] != 1:
+                t = 1 / S.body[k][k]
+                S.mul_line(k, t, True)
+                b.mul_line(k, t, True)
+    return b
+
+            
 a = [[1, 1, 1], [2, 1, 1], [1, 1, 4]]         
 b = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
  
@@ -158,3 +293,6 @@ print(m1*m2)
 print(m1.trace())
 print(m2.transpon())
 print(m2.up_trig_mat())
+print(m2.det())
+print(m2.inverse())
+print(SLAY(m2, m1))
