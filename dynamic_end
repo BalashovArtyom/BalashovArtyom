@@ -69,8 +69,8 @@ void main(){
 
     begin = clock();
     // ===============================
-    int**** p2;
-    p2 = (int****)malloc(N * M * R * P * sizeof(int));
+    int* p2;
+    p2 = (int*)malloc(N * M * R * P * sizeof(int));
     
     srand(time(0)); 
     for (int i = 0; i < N; i++){
