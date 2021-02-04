@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define FILE_PATH "C:\\c_homework\\1.txt"
+
+void main()
+{
+    /* 1)
+    FILE* file;
+    char buffer[128];
+    file = fopen("1.txt", "w");
+    fprintf(file, "Hello, world!");
+	  fclose(file);
+    file = fopen(FILE_PATH, "r");
+    fgets(buffer, 127, file);
+    printf("%s\n", buffer);
+    fclose(file);
+    */
+
+    /* 2)
+	  char str[10];
+	  scanf("%9s", str);
+	  FILE* file;
+    char buffer[128];
+    file = fopen("1.txt", "w");
+	  fprintf(file, str);
+	  fclose(file);
+    file = fopen(FILE_PATH, "r");
+    fscanf(file, "%127s", buffer);
+    printf("%s\n", buffer);
+    fclose(file);
+    */
+    
+    /* 3)
+    char str[10];
+	  int len = 0;
+	  scanf("%9s", str);
+	  while(str[len] != '\0')
+	  {
+		    str[len] += 3;
+		    len++;
+	  }
+	  FILE* file;
+    char buffer[128];
+    file = fopen("1.txt", "w");
+	  fprintf(file, str);
+	  fclose(file);
+    file = fopen(FILE_PATH, "r");
+    fscanf(file, "%127s", buffer);
+    printf("%s\n", buffer);
+    fclose(file);
+    */
+    
+    /* 4)
+    char str[10];
+	  int len = 0;
+	  scanf("%9s", str);
+	  FILE* file;
+    char buffer[128];
+    file = fopen("1.txt", "w");
+	  fprintf(file, str);
+	  fclose(file);
+    file = fopen(FILE_PATH, "r");
+    fscanf(file, "%127s", buffer);
+	  while(buffer[len] != '\0')
+	  {
+		    buffer[len] -= 3;
+		    len++;
+	  }
+    printf("%s\n", buffer);
+    fclose(file);
+    */
+}
