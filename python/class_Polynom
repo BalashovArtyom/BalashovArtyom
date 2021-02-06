@@ -1,0 +1,142 @@
+class Polynom:
+    def __init__(self, coeffs):
+        self.coeffs = coeffs
+        self.power = self.power()
+    
+    
+    def power(self):
+        return len(self.coeffs) - 1
+    
+    
+    def __str__(self):
+        if self.coeffs[0] == 1:
+            p = 'x^{}'.format(self.power)
+        else:
+            p = '{}x^{}'.format(self.coeffs[0], self.power)
+        for i in range(self.power):
+            if self.coeffs[i+1] >= 0:
+                if self.coeffs[i+1] == 0:
+                    continue
+                elif self.coeffs[i+1] == 1:
+                    p += ' + x^{}'.format(self.power-i-1)
+                    continue
+                if self.power-i-1 == 0:
+                    p += ' + {}'.format(self.coeffs[i+1])
+                    continue
+                elif self.power-i-1 == 1:
+                    p += ' + {}x'.format(self.coeffs[i+1])
+                    continue
+                p += ' + {}x^{}'.format(self.coeffs[i+1], self.power-i-1)
+                
+            else:
+                if self.coeffs[i+1] == 0:
+                    continue
+                elif self.coeffs[i+1] == 1:
+                    p += ' - x^{}'.format(self.power-i-1)
+                    continue
+                if self.power-i-1 == 0:
+                    p += ' - {}'.format(self.coeffs[i+1]*(-1))
+                    continue
+                elif self.power-i-1 == 1:
+                    p += ' - {}x'.format(self.coeffs[i+1]*(-1))
+                    continue
+                p += ' - {}x^{}'.format(self.coeffs[i+1]*(-1), self.power-i-1)
+        return p
+    
+    
+    def __add__(self, obj, inplace = False):
+        if self.power >= obj.power: 
+            res = Polynom([0]*(self.power+1))
+            
+            if self.power == obj.power:
+                for i in range(self.power+1):
+                    res.coeffs[i] = self.coeffs[i] + obj.coeffs[i]
+                return res
+            
+            else:
+                for i in range(self.power-obj.power):
+                    res.coeffs[i] = self.coeffs[i]
+                for k in range(obj.power+1):
+                    res.coeffs[k+self.power-obj.power] = self.coeffs[k+self.power-obj.power] + obj.coeffs[k]
+                return res
+            
+        else:
+            res = Polynom([0]*(obj.power+1))
+            
+            for i in range(obj.power-self.power):
+                res.coeffs[i] = obj.coeffs[i]
+            for k in range(self.power+1):
+                res.coeffs[k+obj.power-self.power] = obj.coeffs[k+obj.power-self.power] + self.coeffs[k]
+            return res
+        
+        
+    def __sub__(self, obj, inplace = False):
+        if self.power >= obj.power: 
+            res = Polynom([0]*(self.power+1))
+            
+            if self.power == obj.power:
+                for i in range(self.power+1):
+                    res.coeffs[i] = self.coeffs[i] - obj.coeffs[i]
+                return res
+            
+            else:
+                for i in range(self.power-obj.power):
+                    res.coeffs[i] = self.coeffs[i]
+                for k in range(obj.power+1):
+                    res.coeffs[k+self.power-obj.power] = self.coeffs[k+self.power-obj.power] - obj.coeffs[k]
+                return res
+            
+        else:
+            res = Polynom([0]*(obj.power+1))
+            
+            for i in range(obj.power-self.power):
+                res.coeffs[i] = obj.coeffs[i]
+            for k in range(self.power+1):
+                res.coeffs[k+obj.power-self.power] = obj.coeffs[k+obj.power-self.power] - self.coeffs[k]
+            return res
+        
+        
+    def __mul__(self, obj):
+        res = Polynom([0]*(self.power+obj.power+1))
+        
+        for i in range(self.power+obj.power+1):
+            for j in range(self.power+1):
+                for q in range(obj.power+1):
+                    if j+q == i:
+                        res.coeffs[i] += self.coeffs[j]*obj.coeffs[q]
+        return res
+            
+        
+    def __truediv__(self, obj):
+        res = Polynom([0]*(self.power-obj.power+1))
+        
+        for i in range(self.power-obj.power+1):
+            res.coeffs[i] = self.coeffs[i]/obj.coeffs[0]
+            for k in range(obj.power+1):
+                self.coeffs[k] = self.coeffs[k]-obj.coeffs[k]*res.coeffs[i] 
+        return res  
+        
+        
+    def derivative(self):
+        res = Polynom([0]*(self.power))
+        
+        for i in range(self.power):
+            res.coeffs[i] = (self.power-i)*self.coeffs[i]
+        return res
+        
+    def value(self, arg): 
+        number = 0
+        for i in range(self.power+1):
+            number += self.coeffs[i]*(arg**(self.power-i))
+        return number
+        
+polynom1 = Polynom([1, 1, 2, 9, 0, -10, 2, -2])
+polynom2 = Polynom([   1, 0, 8, 2, -2, 5, 4])
+p3 = Polynom([1, 1])
+print(polynom1)
+print(polynom2)
+print(polynom1+polynom2)
+print(polynom1-polynom2)
+print(polynom1*polynom2)
+print(polynom1.derivative())
+print(polynom1.value(2))
