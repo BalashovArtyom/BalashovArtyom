@@ -1,0 +1,156 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ERROR_FILE_OPEN -3
+#define FILE_PATH "C:\\c_homework\\2.bin"
+
+void main()
+{
+    /*
+    FILE* file;
+    int* p1;
+    int* p2;
+    int* p3;
+    int dimentions, N, M, R;
+    
+    printf("Введите кол-во измерений: ");
+    scanf("%d", &dimentions);
+    
+    file = fopen(FILE_PATH, "wb");
+    if (file == NULL) {
+        printf("File didn't open!\n");
+        exit(ERROR_FILE_OPEN);
+    }
+    
+    if (dimentions == 1){
+        printf("Размер массива: ");
+        scanf("%d", &N);
+        p1 = (int*)malloc(N * sizeof(int));
+        for (int i = 0; i < N; i++){
+            p1[i] = rand();
+        }
+        free(p1);
+        fwrite(&dimentions, sizeof(int), 1, file);
+        fwrite(&N, sizeof(int), 1, file);
+        for (int i = 0; i < N; i++){
+            fwrite(&p1[i], sizeof(int), 1, file);
+        }
+    } else if (dimentions == 2){
+        printf("Размер массива: ");
+        scanf("%d %d", &N, &M);
+        p2 = (int*)malloc(N * M * sizeof(int));
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++)
+                p2[i*N + j] = rand();
+        }
+        free(p2);
+        fwrite(&dimentions, sizeof(int), 1, file);
+        fwrite(&N, sizeof(int), 1, file);
+        fwrite(&M, sizeof(int), 1, file);
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++)
+                fwrite(&p2[i*N + j], sizeof(int), 1, file);
+        }
+    } else if (dimentions == 3){
+        printf("Размер массива: ");
+        scanf("%d %d %d", &N, &M, &R);
+        p3 = (int*)malloc(N * M * R * sizeof(int));
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++){
+                for (int k = 0; k < R; k++)
+                    p3[i*N + j*M + k] = rand();
+            }
+        }
+        free(p3);
+        fwrite(&dimentions, sizeof(int), 1, file);
+        fwrite(&N, sizeof(int), 1, file);
+        fwrite(&M, sizeof(int), 1, file);
+        fwrite(&R, sizeof(int), 1, file);
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++){
+                for (int k = 0; k < R; k++) 
+                    fwrite(&p3[i*N + j*M + k], sizeof(int), 1, file);
+            }
+        }
+    } else
+        printf("Error\n");
+        
+    fclose(file);
+    */
+    
+    FILE* file;
+    int* p1;
+    int* p2;
+    int* p3;
+    int dimentions, N, M, R;
+    
+    file = fopen(FILE_PATH, "rb");
+    if (file == NULL) {
+        printf("File didn't open!\n");
+        exit(ERROR_FILE_OPEN);
+    }
+    
+    fseek(file, 0, SEEK_SET);
+    
+    dimentions = 0;
+    fread(&dimentions, sizeof(int), 1, file);
+    printf("%d\n", dimentions);
+    
+    N = 0;
+    M = 0;
+    R = 0;
+    if (dimentions == 1){
+        fread(&N, sizeof(int), 1, file);
+        printf("%d\n", N);
+        
+        p1 = (int*)malloc(N * sizeof(int));
+        for (int i = 0; i < N; i++){
+            fread(&p1[i], sizeof(int), 1, file);
+        }
+        free(p1);
+        for (int i = 0; i < N; i++){
+            printf("%d ", &p1[i]);
+        }
+        
+    } else if (dimentions == 2){
+        
+        fread(&N, sizeof(int), 1, file);
+        fread(&M, sizeof(int), 1, file);
+        printf("%N %M\n", N, M);
+        
+        p2 = (int*)malloc(N * M * sizeof(int));
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++)
+                fread(&p2[i*N + j], sizeof(int), 1, file);
+        }
+        free(p2);   
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++)
+                printf("%d ", &p2[i*N + j]);
+        }
+        
+    } else if (dimentions == 3){
+        
+        fread(&N, sizeof(int), 1, file);
+        fread(&M, sizeof(int), 1, file);
+        fread(&R, sizeof(int), 1, file);
+        printf("%d %d %d\n", N, M, R);
+        
+        p3 = (int*)malloc(N * M * R * sizeof(int));
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++){
+                for (int k = 0; k < R; k++) 
+                    fread(&p3[i*N + j*M + k], sizeof(int), 1, file);
+            }
+        }
+        free(p3);
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++){
+                for (int k = 0; k < R; k++) 
+                    printf("%d ", &p3[i*N + j*M + k]);
+            }
+        }
+    }
+    
+    fclose(file);
+}
