@@ -1,3 +1,4 @@
+import copy
 class Polynom:
     def __init__(self, coeffs):
         self.coeffs = coeffs
@@ -124,19 +125,117 @@ class Polynom:
             res.coeffs[i] = (self.power-i)*self.coeffs[i]
         return res
         
+        
     def value(self, arg): 
         number = 0
         for i in range(self.power+1):
             number += self.coeffs[i]*(arg**(self.power-i))
         return number
+    
+    
+    def __eq__(self, obj):
+        if self.power == obj.power:
+            for i in range(self.power + 1):
+                if self.coeffs[i] == obj.coeffs[i]:
+                    continue
+                else:
+                    return 0
+            return 1
         
-polynom1 = Polynom([1, 1, 2, 9, 0, -10, 2, -2])
-polynom2 = Polynom([   1, 0, 8, 2, -2, 5, 4])
-p3 = Polynom([1, 1])
-print(polynom1)
-print(polynom2)
-print(polynom1+polynom2)
-print(polynom1-polynom2)
-print(polynom1*polynom2)
-print(polynom1.derivative())
-print(polynom1.value(2))
+        else:
+            return 0
+        
+        
+    def __ne__(self, obj):
+        if self.power == obj.power:
+            for i in range(self.power + 1):
+                if self.coeffs[i] == obj.coeffs[i]:
+                    continue
+                else:
+                    return 1
+            return 0
+        
+        else:
+            return 1
+        
+        
+    def __neg__(self):
+        res = Polynom([0]*(self.power+1))
+        for i in range(self.power + 1):
+            res.coeffs[i] = self.coeffs[i]*(-1)
+        
+        return res
+    
+    
+    def __pos__(self):
+        res = Polynom([0]*(self.power+1))
+        for i in range(self.power + 1):
+            res.coeffs[i] = self.coeffs[i]*1
+        
+        return res
+    
+    
+    def copy(self):
+        res = Polynom([0]*(self.power+1))
+        for i in range(self.power + 1):
+            res.coeffs[i] = copy.copy(self.coeffs[i])
+        
+        return res
+    
+    
+    def __len__(self):
+        return len(self.coeffs)
+    
+    
+    def __iter__(self):
+        return iter(self.coeffs)
+    
+    
+    def __getitem__(self, i):
+        try:
+            return self.coeffs[i]
+        except IndexError as ie:
+            return f'An error occured: {ie}'
+        except TypeError as te:
+            return f'An error occured: {te}'
+        except:
+            return 'Unknown error occured'
+        
+        
+    def __setitem__(self, i, value):
+        if i < 0 or i > len(self.coeffs) - 1:
+            return 'Error'
+        if isinstance(i, int) and isinstance(value, int):
+            self.coeffs[i] = value
+            return ''
+        else:
+            return 'Error'
+        
+        
+#polynom1 = Polynom([1, 1, 2, 9, 0, -10, 2, -2])
+#polynom2 = Polynom([   1, 0, 8, 2, -2, 5, 4])
+#print(polynom1)
+#print(polynom2)
+#print(polynom1+polynom2)
+#print(polynom1-polynom2)
+#print(polynom1*polynom2)
+#print(polynom1.derivative())
+#print(polynom1.value(2))
+
+#p3 = Polynom([3, -2, 1])
+#p4 = Polynom([3, -2, 1])
+#print(p3==p4)
+#print(p3!=p4)
+#print(-p3)
+#print(+p3)
+
+#p5 = Polynom([3, 0, 2, 4])
+#print(p5)
+#print(p5.copy())
+#p6 = Polynom([2, 0, 4, 3])
+#print(len(p6))
+#for i in p6:
+#    print(i)
+#print(p6[-1])
+#p6[1] = -10
+#print(p6)
