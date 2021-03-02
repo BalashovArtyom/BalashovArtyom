@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <math.h>
+#include <limits.h>
+
+double f(double x) {
+    return exp(x) - 2 + 0.3 * sin(2 * x);
+}
+
+double iter(double b, double a) {
+    return (b + a)/2;
+}
+
+void main() {
+    double eps = .0001;
+
+    double b = 15., a = -30., y, y_1, x;
+
+    unsigned i = 0;
+
+    while (fabs(b-a) >= eps) {
+        y_1 = f(a);
+        x = iter(b, a);
+        y = f(x);
+        if (y = 0){
+            printf("x = %lf\t i = %d\n", x, i);
+            break;
+        }
+        if (f(x) * f(a) < 0)
+            b = x;
+        else 
+            a = x;
+            
+        printf("x = %lf\t i = %d\t [%lf; %lf]\n", x, i, b, a);
+        i++;
+    }
+
+    printf("x = %lf\t i = %d\n", x, i);
+    
+    // корней будет бесконечно много с функцией exp(x)+0.3*sin(2*x)
+    // попробовал запустить программу с этой функцией на отрезке, где несколько корней, метод вернул приближенное значение максимального значения на этом отрезке
+    // т.е. на [a; b] с несколькими корнями, где b>a программа возвращает примерно b
+}
