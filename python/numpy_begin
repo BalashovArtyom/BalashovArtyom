@@ -1,0 +1,46 @@
+import numpy as np
+
+#1
+x = np.array([[1, 0, 1], [2, 0, 2], [3, 0, 3], [4, 4, 4]])
+print(x)
+pr = 1
+for i in x.diagonal():
+    if i != 0:
+        pr *= i
+print(i)
+
+#2
+x = np.array([1, 2, 2, 4])
+y = np.array([4, 2, 1, 2])
+for i in np.sort(x) == np.sort(y):
+    if i == False:
+        print(False)
+        break
+if i == True:
+    print(True)
+    
+#3
+x = np.array([6, 2, 0, 3, 0, 0, 5, 7, 0])
+k = 0
+arr = []
+while k < len(x)-1:
+        if x[k] == 0:
+            arr.append(x[k+1])
+        k+=1
+print(max(arr))
+
+#4
+x = np.array([2, 2, 2, 3, 3, 3, 5])
+x = np.sort(x)
+arr = []
+for i in list(set(x)):
+    arr.append(list(x).count(i))
+print(tuple([np.array(list(set(x))), np.array(arr)]))
+
+#5
+X = np.array([[1,1], [2,2], [3,3]])
+Y = np.array([[6,6], [5,5], [4,4]])
+for i in X:
+    for j in Y:
+        print(np.array(np.linalg.norm(j-i)))
+        
