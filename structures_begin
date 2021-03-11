@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <string.h>
+#define N 3
+struct st_student {
+    char name[N][30]; 
+    int grade[N]; 
+}; 
+
+typedef struct st_student student; 
+
+student s;
+
+void read_student( student *s1)
+{
+    for (int i = 0; i < N; i++){
+        scanf("%s", s1->name[i] ); 
+        scanf("%d", &s1->grade[i] ); 
+    }
+}
+
+void print_student(student s)
+{
+    for (int i = 0; i < N; i++){
+        printf("name = %s, ", s.name[i] );
+        printf("grade = %d\n", s.grade[i] );
+    }
+}
+
+student* read_student_analog()
+{
+    student *ms_p;
+    student Ms;
+ 
+    for (int i = 0; i < N; i++){
+        strcpy(Ms.name[i], s.name[i]);
+        Ms.grade[i] = s.grade[i];
+    }
+    ms_p= &Ms;
+ 
+    return ms_p;
+}
+
+int main ()
+{
+    //Вводим попарно, name1 grade1 name2 grade2... с заданным N
+    read_student(&s);
+    print_student(s);
+    printf("%d\n", sizeof(s) == sizeof(student));
+    
+    student *ms_p = NULL;
+    ms_p = read_student_analog();
+    for(int i = 0; i < N; i++)
+        printf("name: %s, grade: %d\n", ms_p->name[i], ms_p->grade[i]);
+    return 0;
+}
