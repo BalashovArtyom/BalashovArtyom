@@ -101,13 +101,13 @@ void swap(Node *head)
 {
     Node *p, *key;
     Node *result = head;
-    head = head->head;      /* Головой стал следующий элемент */
-    result->head = NULL;    /* Первый элемент отсортированного списка */
+    head = head->head;     
+    result->head = NULL;    
 
     while(head->head != NULL){
         key = head;
         head = head->head;
-        if(key->value < result->value){   /* Вставляем результат в голову */
+        if(key->value < result->value){  
             key->head = result;
             result = key;
         }
@@ -115,7 +115,7 @@ void swap(Node *head)
         {
             p = result;
             while(p->head != NULL)
-            {     /* Бежим по уже сформированному результату */
+            {     
                 if(p->head->value > key->value)
                     break;
                 p = p->head;
