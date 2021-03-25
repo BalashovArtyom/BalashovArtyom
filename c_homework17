@@ -1,0 +1,145 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int value;
+    struct Node* head;
+} Node;
+
+int push(Node **Head, int val) {
+    Node *tmp = (Node*)malloc(sizeof(Node));
+    if (tmp == NULL) {
+        return 1;
+    }
+    tmp->value = val;
+    tmp->head = (*Head);
+    (*Head) = tmp;
+    return 0;
+}
+
+int pop(Node **Head) {
+    int iTmp = (*Head)->value;
+    Node *NTmp = (*Head);
+    (*Head) = (*Head)->head;
+    free(NTmp);
+    return iTmp;
+}
+
+void deleteList(Node **Head) {
+    while ((*Head)->head != NULL) {
+        pop(Head);
+    }
+}
+
+void insert(Node **Head, unsigned n, int val) {
+    if (n == 0) {
+        push(Head, val);
+    }
+    else {
+        int counter = 0;
+        Node *tmp = *Head;
+        Node *new = (Node*)malloc(sizeof(Node));
+        if (tmp == NULL) {
+            exit(1);
+        }
+        new->value = val;
+        while (counter < n-1 && tmp) {
+            tmp = tmp->head;
+            counter++;
+        }
+        new->head = tmp->head;
+        tmp->head = new;
+    }
+}
+
+int delete(Node **Head, unsigned n) {
+
+
+    if (n == 0) {
+        return pop(Head);
+    }
+    else {
+        int counter = 0, iTmp;
+        Node *tmp = *Head;
+        Node *tmpDel;
+        if (tmp == NULL) {
+            exit(1);
+        }
+        while (counter < n-1 && tmp) {
+            tmp = tmp->head;
+            counter++;
+        }
+        tmpDel = tmp->head;
+        iTmp = tmp->head->value;
+        tmp->head = tmp->head->head;
+        free(tmpDel);
+        return iTmp;
+    }
+}
+
+int get(Node **Head, unsigned n) {
+    Node *tmp = (*Head);
+    unsigned i = 0;
+    while (tmp->head != NULL && i < n) {
+        tmp = tmp->head;
+        i++;
+    }
+    return tmp->value;
+}
+
+void listprint(Node* head)
+{
+    struct Node *p;
+    p = head;
+    do {
+        printf("%d ", p->value); 
+        p = p->head; 
+    } while (p != NULL);
+}
+
+void swap(Node *head)
+{
+    Node *p, *key;
+    Node *result = head;
+    head = head->head;      /* Головой стал следующий элемент */
+    result->head = NULL;    /* Первый элемент отсортированного списка */
+
+    while(head->head != NULL){
+        key = head;
+        head = head->head;
+        if(key->value < result->value){   /* Вставляем результат в голову */
+            key->head = result;
+            result = key;
+        }
+        else
+        {
+            p = result;
+            while(p->head != NULL)
+            {     /* Бежим по уже сформированному результату */
+                if(p->head->value > key->value)
+                    break;
+                p = p->head;
+            }
+            key->head = p->head;
+            p->head = key;
+        }
+    }
+    head = result;
+}
+
+void main() {
+    Node *pHead = (Node*)malloc(sizeof(Node));
+    //1, 5, 3, 2, 9, 7, 5 
+    pHead->value = 5;
+    push(&pHead, 7);
+    push(&pHead, 9);
+    push(&pHead, 2);
+    push(&pHead, 3);
+    push(&pHead, 5);
+    push(&pHead, 1);
+    listprint(pHead);
+    printf("\n");
+    swap(pHead);
+    listprint(pHead);
+    deleteList(&pHead);
+}
