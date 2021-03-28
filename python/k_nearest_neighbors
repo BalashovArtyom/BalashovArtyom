@@ -1,0 +1,77 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import random
+
+
+def data_generator(numClasses, numElems):
+    data = np.empty((sum(numElems), 2))
+    target = np.empty(sum(numElems))
+    
+    for cl, n in zip(list(range(numClasses)), numElems):
+        start_pos = sum(numElems[:cl])
+        
+        x_c, y_c = random.random()*5, random.random()*5
+        data[start_pos:start_pos+n,:] = np.random.normal([x_c, y_c], 0.5, (n, 2))
+        target[start_pos:start_pos+n] = np.full(n, cl)
+        
+    return  data, target
+    
+    
+data, target = data_generator(3, [100,100,100])
+
+
+plt.scatter(data[:,0], data[:,1], c=target)
+
+
+path = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+headernames = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'Class']
+dataset = pd.read_csv(path, names = headernames)
+dataset.head()
+
+
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 4].values
+
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, shuffle=True)
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+
+
+from sklearn.neighbors import KNeighborsClassifier                #(Возникли проблемы с классом knn, взял встроенный)
+classifier = KNeighborsClassifier(n_neighbors = 40)
+classifier.fit(X_train, y_train)
+
+
+y_pred = classifier.predict(X_test)
+
+
+from sklearn.model_selection import train_test_split
+score = accuracy_score(y_test, y_pred)
+score
+
+
+from sklearn import datasets
+from sklearn.datasets import load_iris
+from pandas import DataFrame
+iris = datasets.load_iris()
+iris_data = DataFrame(iris.data)
+fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(30,15))
+x = np.linspace(0, 150, 150)
+axes[0][0].plot(x, iris_data[0], x, iris_data[1])
+axes[0][0].grid(True)
+axes[0][1].plot(x, iris_data[0], x, iris_data[2])
+axes[0][1].grid(True)
+axes[1][0].plot(x, iris_data[0], x, iris_data[3])
+axes[1][0].grid(True)
+axes[1][1].plot(x, iris_data[1], x, iris_data[2])
+axes[1][1].grid(True)
+axes[2][0].plot(x, iris_data[1], x, iris_data[3])
+axes[2][0].grid(True)
+axes[2][1].plot(x, iris_data[2], x, iris_data[3])
+axes[2][1].grid(True)
