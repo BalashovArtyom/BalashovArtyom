@@ -1,0 +1,32 @@
+from scipy.misc import derivative
+
+def func(x):
+    return np.sin(x*x*x*x*x) + np.cos(x*x) + 52*x*x
+
+#print(derivative(func, 0))
+
+#def df(x):
+#    return 5*x^4 * np.cos(x^5) - 2*x * np.sin(x^2) + 104*x
+
+x = range(-100,100)
+y = [func(xn) for xn in x]
+plt.plot(x, y)
+plt.show()
+
+step = 0.5
+xn = 0 
+
+yn = func(xn)
+
+Y = {xn: yn}
+
+for _ in range(10):
+    xn = xn - step*derivative(func, xn)
+    yn = func(xn)
+    Y[xn] = yn
+    
+X = {}
+for i in range(len(Y)):
+    X[list(Y.values())[i]] = list(Y.keys())[i]
+
+print('minimum = ({}; {})'.format(min(X.items())[1], min(X.items())[0]))
