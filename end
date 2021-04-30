@@ -2,6 +2,8 @@
 #include "math.h"
 #include "time.h"
 
+#define SIZE 10000
+
 float Q_rsqrt( float number ) // number = x*x + y*y + z*z
 {
         int i;
@@ -22,42 +24,40 @@ float Q_rsqrt( float number ) // number = x*x + y*y + z*z
 void main() {
     clock_t begin, end;
     double time_Q_rsqrt, time_sqrtf;
+    float arr_Q_rsqrt[SIZE], arr_sqrtf[SIZE];
+    float arr_x[SIZE], arr_abs_accuracy[SIZE], time_ratio;
     
-    float arr_x[100], arr_abs_accuracy[100], arr_time_ratio[100];
-    
-    for(int i = 1; i <= 100; i++)
+    for(int i = 1; i <= SIZE; i++)
         arr_x[i-1] = i;
         
-    for(int i = 0; i < 100; i++){
-        begin = clock();
-        Q_rsqrt(arr_x[i]);
-        end = clock();
-        time_Q_rsqrt = (double)(end - begin) / CLOCKS_PER_SEC;
+    begin = clock();    
+    for(int i = 0; i < SIZE; i++)
+        arr_Q_rsqrt[i] = Q_rsqrt(arr_x[i]);
+    end = clock();
+    time_Q_rsqrt = (double)(end - begin) / CLOCKS_PER_SEC;
         
-        begin = clock();
-        1/sqrtf(arr_x[i]);
-        end = clock();
-        time_sqrtf = (double)(end - begin) / CLOCKS_PER_SEC;
+    begin = clock();
+    for(int i = 0; i < SIZE; i++)
+        arr_sqrtf[i] = 1/sqrtf(arr_x[i]);
+    end = clock();
+    time_sqrtf = (double)(end - begin) / CLOCKS_PER_SEC;
         
-        arr_time_ratio[i] = time_Q_rsqrt/time_sqrtf;
-    }
-    
-//    for(int i = 0; i < 100; i++)
-//        printf("%f ", arr_time_ratio[i]);
+    time_ratio = time_Q_rsqrt/time_sqrtf;
+
         
-    for(int i = 0; i < 100; i++)
+    for(int i = 0; i < SIZE; i++)
         arr_abs_accuracy[i] = 1/sqrtf(arr_x[i]) - Q_rsqrt(arr_x[i]);
         
-//    for(int i = 0; i < 100; i++)
+//    for(int i = 0; i < SIZE; i++)
 //        printf("%f ", arr_abs_accuracy[i]);
         
     FILE* file;
     char buffer[10000];
     file = fopen("res.csv", "w");
-    for(int i=0; i<100; i++){
-        fprintf(file,"%f, %f, %d, ",arr_x[i], arr_abs_accuracy[i], arr_time_ratio[i]);
-    }
-    fclose(file);
+    for(int i=0; i<100; i++)
+        fprintf(file,"%f, %f, ",arr_x[i], arr_abs_accuracy[i]);
+    fprintf(file,"time_ratio = %d", time_ratio);
+	fclose(file);
     file = fopen("res.csv", "r");
     fgets(buffer, 9999, file);
     printf("%s\n", buffer);
